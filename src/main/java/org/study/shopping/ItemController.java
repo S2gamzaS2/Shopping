@@ -12,11 +12,19 @@ import java.util.List;
 public class ItemController {
 
     private final ItemRepository itemRepository;
+    private final NoticeRepository noticeRepository;
 
     @GetMapping("/list")
     String list(Model model){
         List<Item> result = itemRepository.findAll();
-        model.addAttribute("전달할데이터이름", "치마");
+        model.addAttribute("items", result);
         return "list.html";
+    }
+
+    @GetMapping("/notice")
+    String notice(Model model){
+        List<Notice> result = noticeRepository.findAll();
+        model.addAttribute("notices", result);
+        return "notice.html";
     }
 }
