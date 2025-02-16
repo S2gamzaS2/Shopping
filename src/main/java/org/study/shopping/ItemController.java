@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -15,6 +14,7 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final NoticeRepository noticeRepository;
+    private final ItemService itemService;
 
     @GetMapping("/list")
     String list(Model model){
@@ -36,9 +36,8 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    String addPost(@ModelAttribute Item item){
-        System.out.println(item);
-        itemRepository.save(item);
+    String addPost(String title, Integer price){
+        itemService.saveItem(title, price);
         return "redirect:/list";
     }
 
@@ -49,6 +48,22 @@ public class ItemController {
             model.addAttribute("items", result.get());
             return "detail.html";
         }
+        return "redirect:/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable Long id, Model model) {
+        Optional<Item> result = itemRepository.findById(id);
+        if(result.isPresent()){
+            model.addAttribute("item", result.get());
+            return "edit.html";
+        }
+        return "redirect:/list";
+    }
+
+    @PostMapping("/edit")
+    String editItem(@RequestParam Long id, String title, Integer price) throws Exception {
+        itemService.editItem(id, title, price);
         return "redirect:/list";
     }
 }

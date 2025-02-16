@@ -16,7 +16,8 @@
         <div>
             <h4 th:text="${i.title}"></h4>
             <a th:href="@{ '/detail/' + ${i.id} }">상세페이지</a>
-            <p th:text="${i.price}"></p>
+            <p th:text="${i.price + '원'}"></p>
+            <a th:href="@{ '/edit/' + ${i.id} }">✏️</a>
         </div>
     </div>
 </body>
