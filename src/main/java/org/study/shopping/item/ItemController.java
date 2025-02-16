@@ -1,9 +1,11 @@
-package org.study.shopping;
+package org.study.shopping.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.study.shopping.notice.Notice;
+import org.study.shopping.notice.NoticeRepository;
 
 import java.util.List;
 import java.util.Optional;

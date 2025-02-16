@@ -1,4 +1,4 @@
-package org.study.shopping;
+package org.study.shopping.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
